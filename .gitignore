@@ -1,0 +1,57 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vs/
+TestResults/
+*.log
+*.pdb
+*.cache
+*.db
+*.DS_Store
+
+# Publish output
+publish/
+**/bin/Release/net*/publish/
+**/bin/Debug/net*/publish/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Node.js / NPM / CDK
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# CDK output
+cdk.out/
+cfn-template.yaml
+.idea/
+
+# Environment files
+.env
+.env.*
+
+# React (Vite)
+dist/
+build/
+coverage/
+.eslintcache
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# GitHub Actions
+*.log
+*.coverage
+
+# General
+*.tmp
+*.bak

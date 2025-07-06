@@ -1,0 +1,405 @@
+Resources:
+  GeoAlertLambdaServiceRoleC87EC0B6:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertLambda/ServiceRole/Resource
+  GeoAlertLambdaA18E85DD:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: "
+
+          \        exports.handler = async (event) => {
+
+          \          console.log(\"Received event:\", JSON.stringify(event));
+
+          \          return { statusCode: 200, body: \"Hello from Lambda\" };
+
+          \        };
+
+          \      "
+      Handler: index.handler
+      Role:
+        Fn::GetAtt:
+          - GeoAlertLambdaServiceRoleC87EC0B6
+          - Arn
+      Runtime: nodejs20.x
+    DependsOn:
+      - GeoAlertLambdaServiceRoleC87EC0B6
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertLambda/Resource
+  GeoAlertLambdaLogGroup9E45BEAA:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName:
+        Fn::Join:
+          - ""
+          - - /aws/lambda/
+            - Ref: GeoAlertLambdaA18E85DD
+      RetentionInDays: 731
+    UpdateReplacePolicy: Retain
+    DeletionPolicy: Retain
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertLambda/LogGroup/Resource
+  GeoAlertApi1FB193D0:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: GeoAlertApi
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertApi/Resource
+  GeoAlertApiDeployment29081BF030467eaac3645f6061ccfc167dad0e7c:
+    Type: AWS::ApiGateway::Deployment
+    Properties:
+      Description: Automatically created by the RestApi construct
+      RestApiId:
+        Ref: GeoAlertApi1FB193D0
+    DependsOn:
+      - GeoAlertApiproxyANY6BBB10FE
+      - GeoAlertApiproxy45A2E714
+      - GeoAlertApiANY30B46FC5
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertApi/Deployment/Resource
+      aws:cdk:do-not-refactor: true
+  GeoAlertApiDeploymentStageprod63BD4010:
+    Type: AWS::ApiGateway::Stage
+    Properties:
+      DeploymentId:
+        Ref: GeoAlertApiDeployment29081BF030467eaac3645f6061ccfc167dad0e7c
+      RestApiId:
+        Ref: GeoAlertApi1FB193D0
+      StageName: prod
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertApi/DeploymentStage.prod/Resource
+  GeoAlertApiproxy45A2E714:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Fn::GetAtt:
+          - GeoAlertApi1FB193D0
+          - RootResourceId
+      PathPart: "{proxy+}"
+      RestApiId:
+        Ref: GeoAlertApi1FB193D0
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertApi/Default/{proxy+}/Resource
+  GeoAlertApiproxyANYApiPermissionGeoAlertInfraStackGeoAlertApiD51E6610ANYproxyC0D449E1:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - GeoAlertLambdaA18E85DD
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: GeoAlertApi1FB193D0
+            - /
+            - Ref: GeoAlertApiDeploymentStageprod63BD4010
+            - /*/*
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertApi/Default/{proxy+}/ANY/ApiPermission.GeoAlertInfraStackGeoAlertApiD51E6610.ANY..{proxy+}
+  GeoAlertApiproxyANYApiPermissionTestGeoAlertInfraStackGeoAlertApiD51E6610ANYproxy6ACC38E5:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - GeoAlertLambdaA18E85DD
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: GeoAlertApi1FB193D0
+            - /test-invoke-stage/*/*
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertApi/Default/{proxy+}/ANY/ApiPermission.Test.GeoAlertInfraStackGeoAlertApiD51E6610.ANY..{proxy+}
+  GeoAlertApiproxyANY6BBB10FE:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: ANY
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - ":apigateway:"
+              - Ref: AWS::Region
+              - :lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - GeoAlertLambdaA18E85DD
+                  - Arn
+              - /invocations
+      ResourceId:
+        Ref: GeoAlertApiproxy45A2E714
+      RestApiId:
+        Ref: GeoAlertApi1FB193D0
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertApi/Default/{proxy+}/ANY/Resource
+  GeoAlertApiANYApiPermissionGeoAlertInfraStackGeoAlertApiD51E6610ANYA07C89DD:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - GeoAlertLambdaA18E85DD
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: GeoAlertApi1FB193D0
+            - /
+            - Ref: GeoAlertApiDeploymentStageprod63BD4010
+            - /*/
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertApi/Default/ANY/ApiPermission.GeoAlertInfraStackGeoAlertApiD51E6610.ANY..
+  GeoAlertApiANYApiPermissionTestGeoAlertInfraStackGeoAlertApiD51E6610ANYBCDD05AE:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - GeoAlertLambdaA18E85DD
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: GeoAlertApi1FB193D0
+            - /test-invoke-stage/*/
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertApi/Default/ANY/ApiPermission.Test.GeoAlertInfraStackGeoAlertApiD51E6610.ANY..
+  GeoAlertApiANY30B46FC5:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: ANY
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - ":apigateway:"
+              - Ref: AWS::Region
+              - :lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - GeoAlertLambdaA18E85DD
+                  - Arn
+              - /invocations
+      ResourceId:
+        Fn::GetAtt:
+          - GeoAlertApi1FB193D0
+          - RootResourceId
+      RestApiId:
+        Ref: GeoAlertApi1FB193D0
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertApi/Default/ANY/Resource
+  GeoFencesTable0E8059F4:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: Id
+          AttributeType: S
+      BillingMode: PAY_PER_REQUEST
+      KeySchema:
+        - AttributeName: Id
+          KeyType: HASH
+    UpdateReplacePolicy: Delete
+    DeletionPolicy: Delete
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoFencesTable/Resource
+  GeoAlertNotificationsTopic35BD8442:
+    Type: AWS::SNS::Topic
+    Properties:
+      DisplayName: GeoAlert Notifications Topic
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertNotificationsTopic/Resource
+  GeoAlertEventRule09BA31E8:
+    Type: AWS::Events::Rule
+    Properties:
+      EventPattern:
+        source:
+          - geoalert.app
+        detail-type:
+          - GeoAlertEvent
+      State: ENABLED
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/GeoAlertEventRule/Resource
+  CDKMetadata:
+    Type: AWS::CDK::Metadata
+    Properties:
+      Analytics: v2:deflate64:H4sIAAAAAAAA/6VUTW/bMAz9LfNxULwu2Cm3dMuGYuuapdmhCIKAkVRXrSwJkpzOMPzfR33YSTMMQ7GTJZLv8ZEiPS2nF9Py4g08uwllTxMp9mV364E+ETTtOgn1nkHZfW4U9UKrTVfYRnlR82JWvC1I8QCKSW7zjWqWHP2WfLxXAyqcl9zWwjm89URAXXYrLTnSgXNNzdllW8y6wlihqDAg55RqzJNpU0wAzCNfSkGKGhRUnC21FFRwV8yQ79TWzm2O3SZBgaInUleu7L7p6ovVjUGMzMfvUJ/KHyJ6AkZU4PkztIiLLVlx5+dGIJjxe2ikv1KeVxZGeeetMVb/whq9bTgpbEIf85HuVeGpmGQln7iRuq258lGNo1aYExmoPZ8s9yDUMdyNuYGxtcZyBQV5xUIfsWOvtUdRR3aCY1TxKGkwnYiPToIl6MZSfgmOb9C3JctQ92BGsAHLxzn4a6uz45r7B81uYvXH4k4osvYUh7JDyrGZMSVJvjDn2TK8pvdmwEWD+EOFPkv8nwxRVwL0hLUKas1wO9ewl7kzXoTwrzzujoJxKX1rwvE27MheSClUdZ02czm/2y0Xq91q8ePn4nYdh6LWB5BpXzACB8hb3eb0MVlPnMKFWWsjaHhP4YyE9mwao7cn/BAGC7e7iSLjdQne87CJXfGiISzMo1wnsciTX2fxArP5B2h4P8yHBOPkxNgwUOi7abxpfE8U9qB8dO8O0w/le/zpPTohJvl3Vq7S9zdaIwSOEQUAAA==
+    Metadata:
+      aws:cdk:path: GeoAlertInfraStack/CDKMetadata/Default
+    Condition: CDKMetadataAvailable
+Outputs:
+  GeoAlertApiEndpoint8A7B6DD7:
+    Value:
+      Fn::Join:
+        - ""
+        - - https://
+          - Ref: GeoAlertApi1FB193D0
+          - .execute-api.
+          - Ref: AWS::Region
+          - "."
+          - Ref: AWS::URLSuffix
+          - /
+          - Ref: GeoAlertApiDeploymentStageprod63BD4010
+          - /
+Conditions:
+  CDKMetadataAvailable:
+    Fn::Or:
+      - Fn::Or:
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - af-south-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-east-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-northeast-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-northeast-2
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-northeast-3
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-south-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-south-2
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-southeast-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-southeast-2
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-southeast-3
+      - Fn::Or:
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-southeast-4
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ca-central-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ca-west-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - cn-north-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - cn-northwest-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - eu-central-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - eu-central-2
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - eu-north-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - eu-south-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - eu-south-2
+      - Fn::Or:
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - eu-west-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - eu-west-2
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - eu-west-3
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - il-central-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - me-central-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - me-south-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - sa-east-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - us-east-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - us-east-2
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - us-west-1
+      - Fn::Equals:
+          - Ref: AWS::Region
+          - us-west-2
+Parameters:
+  BootstrapVersion:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: /cdk-bootstrap/hnb659fds/version
+    Description: Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]
+
