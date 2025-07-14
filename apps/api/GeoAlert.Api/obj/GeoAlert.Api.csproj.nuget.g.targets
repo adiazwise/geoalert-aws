@@ -1,2 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)awssdk.extensions.netcore.setup/4.0.2/buildTransitive/net8.0/AWSSDK.Extensions.NETCore.Setup.targets" Condition="Exists('$(NuGetPackageRoot)awssdk.extensions.netcore.setup/4.0.2/buildTransitive/net8.0/AWSSDK.Extensions.NETCore.Setup.targets')" />
+  </ImportGroup>
+</Project>

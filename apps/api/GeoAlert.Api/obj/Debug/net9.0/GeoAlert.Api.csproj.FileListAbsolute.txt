@@ -54,3 +54,15 @@
 /Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/obj/Debug/net9.0/GeoAlert.Api.pdb
 /Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/obj/Debug/net9.0/GeoAlert.Api.genruntimeconfig.cache
 /Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/obj/Debug/net9.0/ref/GeoAlert.Api.dll
+/Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/obj/Debug/net9.0/GeoAlert.Api.csproj.AssemblyReference.cache
+/Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/obj/Debug/net9.0/GeoAlert.Api.sourcelink.json
+/Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/bin/Debug/net9.0/Amazon.Lambda.APIGatewayEvents.dll
+/Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/bin/Debug/net9.0/Amazon.Lambda.ApplicationLoadBalancerEvents.dll
+/Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/bin/Debug/net9.0/Amazon.Lambda.AspNetCoreServer.dll
+/Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/bin/Debug/net9.0/Amazon.Lambda.AspNetCoreServer.Hosting.dll
+/Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/bin/Debug/net9.0/Amazon.Lambda.Core.dll
+/Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/bin/Debug/net9.0/Amazon.Lambda.Logging.AspNetCore.dll
+/Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/bin/Debug/net9.0/Amazon.Lambda.RuntimeSupport.dll
+/Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/bin/Debug/net9.0/Amazon.Lambda.Serialization.SystemTextJson.dll
+/Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/bin/Debug/net9.0/SnapshotRestore.Registry.dll
+/Users/andresdiaz/Projects/geoalert-aws/apps/api/GeoAlert.Api/obj/Debug/net9.0/GeoAlert.A4D1F99D.Up2Date

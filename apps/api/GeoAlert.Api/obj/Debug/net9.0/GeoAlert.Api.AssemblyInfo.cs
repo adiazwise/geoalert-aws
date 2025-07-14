@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GeoAlert.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2014460f5248636ce75530313fec598d6034dfcc")]
 [assembly: System.Reflection.AssemblyProductAttribute("GeoAlert.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GeoAlert.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

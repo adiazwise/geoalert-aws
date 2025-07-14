@@ -1,9 +1,11 @@
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddHealthChecks();
+CreateHostBuilder(args).Build().Run();
 
-var app = builder.Build();
 
-app.MapGet("/health", () => "The GeoAlert API is running!");
+ static IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder(args)
+    .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+ 
+ 
 
-app.MapHealthChecks("/health-check");
-app.Run();
+
+
