@@ -28,13 +28,13 @@
           }
         }
       },
-      "Amazon.Lambda.AspNetCoreServer/9.1.2": {
+      "Amazon.Lambda.AspNetCoreServer/9.2.0": {
         "type": "package",
         "dependencies": {
           "Amazon.Lambda.APIGatewayEvents": "2.7.1",
           "Amazon.Lambda.ApplicationLoadBalancerEvents": "2.2.0",
-          "Amazon.Lambda.Core": "2.6.0",
-          "Amazon.Lambda.Logging.AspNetCore": "4.0.0",
+          "Amazon.Lambda.Core": "2.7.0",
+          "Amazon.Lambda.Logging.AspNetCore": "4.1.0",
           "Amazon.Lambda.Serialization.SystemTextJson": "2.4.4"
         },
         "compile": {
@@ -51,12 +51,12 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "Amazon.Lambda.AspNetCoreServer.Hosting/1.8.2": {
+      "Amazon.Lambda.AspNetCoreServer.Hosting/1.9.0": {
         "type": "package",
         "dependencies": {
           "Amazon.Lambda.APIGatewayEvents": "2.7.1",
-          "Amazon.Lambda.AspNetCoreServer": "9.1.2",
-          "Amazon.Lambda.Core": "2.6.0",
+          "Amazon.Lambda.AspNetCoreServer": "9.2.0",
+          "Amazon.Lambda.Core": "2.7.0",
           "Amazon.Lambda.RuntimeSupport": "1.13.1"
         },
         "compile": {
@@ -70,7 +70,7 @@
           }
         }
       },
-      "Amazon.Lambda.Core/2.6.0": {
+      "Amazon.Lambda.Core/2.7.0": {
         "type": "package",
         "compile": {
           "lib/net8.0/Amazon.Lambda.Core.dll": {
@@ -83,10 +83,10 @@
           }
         }
       },
-      "Amazon.Lambda.Logging.AspNetCore/4.0.0": {
+      "Amazon.Lambda.Logging.AspNetCore/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Amazon.Lambda.Core": "2.6.0",
+          "Amazon.Lambda.Core": "2.7.0",
           "Microsoft.Extensions.Configuration.Abstractions": "2.1.0",
           "Microsoft.Extensions.Logging": "2.1.0",
           "Microsoft.Extensions.Logging.Abstractions": "2.1.0"
@@ -405,15 +405,15 @@
         "lib/netstandard2.0/Amazon.Lambda.ApplicationLoadBalancerEvents.xml"
       ]
     },
-    "Amazon.Lambda.AspNetCoreServer/9.1.2": {
-      "sha512": "z9XVQqfAypwNzIyoL5qlxMJCyrPbK/WAd8aWfI107rJHY57pU6Nz8gMSZJ/7m82ALElmP+G2EuLkTu7SULo7KA==",
+    "Amazon.Lambda.AspNetCoreServer/9.2.0": {
+      "sha512": "NAhy6IaGhxRP6w6HXMLrdWFWs2KCMgAQKVaoj6hbdC1nPcxADQlz+bWqAThHq0B7lwYoSo47ArZ5xUC5RxER6g==",
       "type": "package",
-      "path": "amazon.lambda.aspnetcoreserver/9.1.2",
+      "path": "amazon.lambda.aspnetcoreserver/9.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "amazon.lambda.aspnetcoreserver.9.1.2.nupkg.sha512",
+        "amazon.lambda.aspnetcoreserver.9.2.0.nupkg.sha512",
         "amazon.lambda.aspnetcoreserver.nuspec",
         "lib/net6.0/Amazon.Lambda.AspNetCoreServer.dll",
         "lib/net6.0/Amazon.Lambda.AspNetCoreServer.xml",
@@ -421,15 +421,15 @@
         "lib/net8.0/Amazon.Lambda.AspNetCoreServer.xml"
       ]
     },
-    "Amazon.Lambda.AspNetCoreServer.Hosting/1.8.2": {
-      "sha512": "Yp9RSGWJfE8sEnYdyI73YrK+xoP26R89Jn7vruZA5cvRKgDbcCm765xdlJ5gh+/LM2m5CRty8qsMsijPi4iS4Q==",
+    "Amazon.Lambda.AspNetCoreServer.Hosting/1.9.0": {
+      "sha512": "MgINq4gWLdUfqxq1UxsztOMQYrLCbbqX8iZSJZH9bHqags7NvOOE5tEp0hwxOmcwDQdROcWsg/V6eOh+dV2E1A==",
       "type": "package",
-      "path": "amazon.lambda.aspnetcoreserver.hosting/1.8.2",
+      "path": "amazon.lambda.aspnetcoreserver.hosting/1.9.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "amazon.lambda.aspnetcoreserver.hosting.1.8.2.nupkg.sha512",
+        "amazon.lambda.aspnetcoreserver.hosting.1.9.0.nupkg.sha512",
         "amazon.lambda.aspnetcoreserver.hosting.nuspec",
         "lib/net6.0/Amazon.Lambda.AspNetCoreServer.Hosting.dll",
         "lib/net6.0/Amazon.Lambda.AspNetCoreServer.Hosting.xml",
@@ -437,15 +437,15 @@
         "lib/net8.0/Amazon.Lambda.AspNetCoreServer.Hosting.xml"
       ]
     },
-    "Amazon.Lambda.Core/2.6.0": {
-      "sha512": "CX3wtadH3DAHf4buJrw9IHK6/tJ5KNePgTTfcBzewpA18sbUD/afpksfSF39ZGAfTBaQfYS9487Y6aLWcvcDRg==",
+    "Amazon.Lambda.Core/2.7.0": {
+      "sha512": "MUl+uIpB00yE8TwmW4ICEE3hd7DEgIWu94a7sFtAHoKz+skS52splHDxN/syId2E5STSYHCertdJSv7Qg1JdSA==",
       "type": "package",
-      "path": "amazon.lambda.core/2.6.0",
+      "path": "amazon.lambda.core/2.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "amazon.lambda.core.2.6.0.nupkg.sha512",
+        "amazon.lambda.core.2.7.0.nupkg.sha512",
         "amazon.lambda.core.nuspec",
         "lib/net6.0/Amazon.Lambda.Core.dll",
         "lib/net6.0/Amazon.Lambda.Core.xml",
@@ -455,14 +455,14 @@
         "lib/netstandard2.0/Amazon.Lambda.Core.xml"
       ]
     },
-    "Amazon.Lambda.Logging.AspNetCore/4.0.0": {
-      "sha512": "MndqD1ufgvGGAMIlVuXL+XPAmM5X512UBMmJKKZ3fhWWQt4qgZJ60LVpzsIVoJWpH6c2oyY/akjV7qC9tDbcrQ==",
+    "Amazon.Lambda.Logging.AspNetCore/4.1.0": {
+      "sha512": "dwMUsQSy4NtBNvD1pNn6u/RTNIvfpp4Y12IE93FD3Rvx13yBbBXf2Fkr9vBblzt8w8o9k4VN+duK6iPNuAwMmQ==",
       "type": "package",
-      "path": "amazon.lambda.logging.aspnetcore/4.0.0",
+      "path": "amazon.lambda.logging.aspnetcore/4.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "amazon.lambda.logging.aspnetcore.4.0.0.nupkg.sha512",
+        "amazon.lambda.logging.aspnetcore.4.1.0.nupkg.sha512",
         "amazon.lambda.logging.aspnetcore.nuspec",
         "lib/net6.0/Amazon.Lambda.Logging.AspNetCore.dll",
         "lib/net6.0/Amazon.Lambda.Logging.AspNetCore.xml",
@@ -828,7 +828,7 @@
       "AWSSDK.DynamoDBv2 >= 4.0.2.1",
       "AWSSDK.Extensions.NETCore.Setup >= 4.0.2",
       "AWSSDK.LocationService >= 4.0.0.13",
-      "Amazon.Lambda.AspNetCoreServer.Hosting >= 1.8.2"
+      "Amazon.Lambda.AspNetCoreServer.Hosting >= 1.9.0"
     ]
   },
   "packageFolders": {
@@ -887,7 +887,7 @@
           },
           "Amazon.Lambda.AspNetCoreServer.Hosting": {
             "target": "Package",
-            "version": "[1.8.2, )"
+            "version": "[1.9.0, )"
           }
         },
         "imports": [

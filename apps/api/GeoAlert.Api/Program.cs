@@ -1,11 +1,18 @@
-CreateHostBuilder(args).Build().Run();
+
+using Amazon.Lambda.AspNetCoreServer;
+using GeoAlert.Api.Endpoints;
+using GeoAlert.Api.Services;
+
+var builder =  WebApplication.CreateBuilder(args);
 
 
- static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-    .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
+builder.Services.AddGeofencesServices();
+
+var app = builder.Build();
+
+app.AddMapGeoFences();
+
+app.Run();
+
  
- 
-
-
-

@@ -57,7 +57,7 @@
             },
             "Amazon.Lambda.AspNetCoreServer.Hosting": {
               "target": "Package",
-              "version": "[1.8.2, )"
+              "version": "[1.9.0, )"
             }
           },
           "imports": [
